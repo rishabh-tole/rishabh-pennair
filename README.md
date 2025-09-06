@@ -9,22 +9,22 @@ This project implements a shape detection pipeline that started from simple mask
 
 ---
 
-## 🔧 Installation
+## Installation
 
 > Requires Python 3.8+.
 
 ```bash
 # 1) Clone and enter the repo
-git clone <YOUR-REPO-URL>
-cd <YOUR-REPO-FOLDER>
+git clone https://github.com/rishabh-tole/rishabh-pennair
+cd rishabh-pennair
 
 # 2) Install dependencies
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ---
 
-## 📁 Files
+## Files
 
 - **shape_detector.py** — Core class: optical flow (forward diff), tolerant zero-map, neighbor pruning, contour drawing.  
 - **part1.py** — Static image pipeline; quick visual overlay (Matplotlib).  
@@ -34,7 +34,7 @@ pip install -r requirements.txt
 
 ---
 
-## ▶️ How to Run
+## How to Run
 
 Update the input paths inside each script to match your files.  
 Look for `IMG_PATH` / `VIDEO_PATH` at the top of each `part*.py`.
@@ -169,23 +169,7 @@ Each script exposes key parameters near the top:
 
 ---
 
-## 🧪 Tips & Troubleshooting
-
-- **If no shapes appear:**  
-  - Increase `GAUSS_SIGMA` slightly.  
-  - Loosen `TOL_X, TOL_Y`.  
-  - Reduce `MIN_AREA` to visualize more candidates.  
-
-- **If too many specks/noise:**  
-  - Increase `MIN_ADJ` and/or `PRUNE_N`.  
-  - In `part3`, increase `LARGE_PRUNE_WIN` or adjust `FILL/CLEAR_THRESHOLD`.  
-
-- **If 3D depth prints nan or fails:**  
-  - Ensure a circle is visible and large enough.  
-  - Check `REAL_RADIUS_M` is correct (10 in = 0.254 m).  
-  - Verify the video path and that FPS is detected (defaults to 30 if unknown).  
-
-
+## Demo
 
 Here is what my algorithm looks like for the static Image:
 
@@ -207,3 +191,20 @@ And here is the clean version:
 Finally, here is the part 4 demo:
 
 ![Demo](gif_out/pennair_dynamic_ez_3d_overlay.gif)
+
+---
+
+## Improvements
+
+There are a few places where I think this algorithm can be significantly improved.
+
+The first is tracing shapes through overlap and making sure that centers stay at the actual center. I have an idea of how this can be done.
+
+First, we reimagine the contour drawing. When the original contours are drawn, we check for the first few frames to see if the areas are constant. This makes sure that we have outlined all the shapes in their entirety. Then, we make a number of points (ideally at the edges) using only a small fraction of the points. Every time you draw contours, you draw the points at the same spots (this part is a little tricky but can be done).  
+
+Next, you compute the translation vector between the corresponding points from frame *n+1* and frame *n*. If the shape has no overlap with another shape, then the translation vector between all the points framewise should be the same.  
+
+When there is overlap, there will no longer be the same translation vector between all points. At this point, you take the vector that appears the most times, and then add it to the *n* frame. That way you should get the (overlap agnostic) *n+1* frame position.  
+
+Finally, just draw lines to connect all the dots.
+
