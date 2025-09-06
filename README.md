@@ -187,12 +187,23 @@ Each script exposes key parameters near the top:
 
 
 
-Static Borders:
+Here is what my algorithm looks like for the static Image:
 
 ![Detector overlay](output_videos/static.png)
 
 
+Here is what my algorithm looks like for the easy video:
+
 ![Demo](gif_out/OUT_dynamic_ez.gif)
 
+I have created a video visualizing the different steps of my algorithm, here is the video below:
 
+![Demo](gif_out/PennAir_dynamic_hard_stages_2x2.gif)
 
+And here is the clean version:
+
+![Demo](gif_out/PennAir_dynamic_hard_clean.gif)
+
+Finally, here is the part 4 demo:
+
+![Demo](gif_out/pennair_dynamic_ez_3d_overlay.gif)
