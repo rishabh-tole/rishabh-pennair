@@ -192,6 +192,11 @@ Static Borders:
 ![Detector overlay](output_videos/static.png)
 
 
-[Easy Dynamic Demo](https://github.com/rishabh-tole/rishabh-pennair/blob/main/compressed_demos/OUT_dynamic_ez.mp4)
+<video src="compressed_demos/OUT_dynamic_ez.mp4?raw=true" 
+       controls width="720">
+</video>
+
+
+[Easy Dynamic Demo](https://github.com/rishabh-tole/rishabh-pennair/blob/main/compressed_demos/OUT_dynamic_ez.mp4?raw=true)
 
 
