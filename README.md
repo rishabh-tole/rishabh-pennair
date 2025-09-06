@@ -200,9 +200,9 @@ There are a few places where I think this algorithm can be significantly improve
 
 The first is tracing shapes through overlap and making sure that centers stay at the actual center. I have an idea of how this can be done.
 
-First, we reimagine the contour drawing. When the original contours are drawn, we check for the first few frames to see if the areas are constant. This makes sure that we have outlined all the shapes in their entirety. Then, we make a number of points (ideally at the edges) using only a small fraction of the points. Every time you draw contours, you draw the points at the same spots (this part is a little tricky but can be done).  
+First, we reimagine the contour drawing. When the original contours are drawn, we check for the first few frames to see if the areas are constant. This makes sure that we have outlined all the shapes in their entirety. Then, we make a number of points around the contour (ideally at the edges). Every time you draw contours, you draw the points at the same spots relative to the shape (this part is a little tricky but I think it can be done).  
 
-Next, you compute the translation vector between the corresponding points from frame *n+1* and frame *n*. If the shape has no overlap with another shape, then the translation vector between all the points framewise should be the same.  
+Next, you compute the rotation and translation vector between the corresponding points from frame *n+1* and frame *n*. If the shape has no overlap with another shape, then the translation vector between all the points framewise should be the same.  
 
 When there is overlap, there will no longer be the same translation vector between all points. At this point, you take the vector that appears the most times, and then add it to the *n* frame. That way you should get the (overlap agnostic) *n+1* frame position.  
 
