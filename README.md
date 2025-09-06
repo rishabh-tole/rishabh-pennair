@@ -192,3 +192,6 @@ Static Borders:
 ![Detector overlay](output_videos/static.png)
 
 
+[Easy Dynamic Demo](https://github.com/rishabh-tole/rishabh-pennair/blob/main/output_videos/OUT_dynamic_ez.mp4)
+
+
